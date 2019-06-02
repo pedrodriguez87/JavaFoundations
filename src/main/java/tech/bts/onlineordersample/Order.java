@@ -1,76 +1,77 @@
 package tech.bts.onlineordersample;
 
-import tech.bts.onlineordersample.model.Dish;
-import tech.bts.onlineordersample.model.TypeOfDish;
+import tech.bts.onlineordersample.model.Dessert;
+import tech.bts.onlineordersample.model.DishNew;
+import tech.bts.onlineordersample.model.MainDish;
+import tech.bts.onlineordersample.model.Starter;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
-public class Order extends Dish{
+public class Order {
 
     private String customerName;
-    private String dishName;
-    private String type;
-    private TypeOfDish typeOfDish;
-    private boolean gfd;
-    private boolean vgd;
-    private boolean hmd;
-    private boolean sfd;
-    private Object extras;
-    private Dish dish;
-    private static List<Order> orders = new ArrayList<Order>();
+    private Starter starter;
+    private MainDish mainDish;
+    private Dessert dessert;
 
-    public Order(){
+
+    public Order() {
     }
 
-
-    public Order(String customerName, String dishName, TypeOfDish typeOfDish, boolean gfd, boolean vgd, boolean hmd, boolean sfd, Object extras) {
+    public Order(String customerName) {
         this.customerName = customerName;
-        this.dishName = dishName;
-        this.typeOfDish = typeOfDish;
-        this.gfd = gfd;
-        this.vgd = vgd;
-        this.hmd = hmd;
-        this.sfd = sfd;
-        this.extras = extras;
-
-        orders.add(this);
     }
 
-    public TypeOfDish getTypeOfDish() {
-        return typeOfDish;
+    //constructor with all parameters
+    public Order(String customerName, Starter starter, MainDish mainDish, Dessert dessert) {
+        this.customerName = customerName;
+        this.starter = starter;
+        this.mainDish = mainDish;
+        this.dessert = dessert;
     }
 
-    public void setTypeOfDish(TypeOfDish typeOfDish) {
-        this.typeOfDish = typeOfDish;
-    }
 
-    public String getCustomerName() {
-        return customerName;
-    }
+    public List<DishNew> getAllDishes() { return Arrays.asList(starter, mainDish, dessert); }
+
+    public String getCustomerName() { return customerName; }
 
     public void setCustomerName(String customerName) {
         this.customerName = customerName;
     }
 
-    public Dish getDish() {
-        return dish;
+    public Order getOrder() { return this; }
+
+    public Starter getStarter() { return starter; }
+
+    public void setStarter(DishNew starter) {
+        this.starter = (Starter) starter;
     }
 
-    public void setDish(Dish dish) {
-        this.dish = dish;
+    public MainDish getMainCourse() { return mainDish; }
+
+    public void setMainCourse(DishNew mainDish) {
+        this.mainDish = (MainDish) mainDish;
     }
 
-    public static List<Order> getOrders() {
-        return orders;
-    }
+    public Dessert getDessert() { return dessert; }
 
-    public static void setOrders(List<Order> orders) {
-        Order.orders = orders;
+    public void setDessert(DishNew dessert) {
+        this.dessert = (Dessert) dessert;
     }
 
     @Override
     public String toString() {
-        return customerName;
+        String result = " Customer: " + customerName + ".   ";
+        if(starter != null) {
+            result += "Dish :" + starter.toString() + "\n";
+        }
+        if(mainDish != null) {
+            result += "Dish :" + mainDish.toString() + "\n";
+        }
+        if(dessert != null) {
+            result += "Dish :" + dessert.toString() + "\n";
+        }
+        return result;
     }
 }
